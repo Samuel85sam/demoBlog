@@ -29,6 +29,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -37,6 +38,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
@@ -75,6 +78,9 @@ model Post {
   // category
   catSlug String
   cat Category @relation(fields: [catSlug], references: [slug])
+
+  @@index([userEmail])
+  @@index([catSlug])
 }
 
 model Category {
@@ -93,4 +99,7 @@ model Comment {
   user User @relation(fields: [userEmail], references: [email])
   postSlug String
   post Post @relation(fields: [postSlug], references: [slug])
+
+  @@index([userEmail])
+  @@index([postSlug])
 }

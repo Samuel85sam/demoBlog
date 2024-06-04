@@ -31,24 +31,24 @@ export default function WritePage() {
   const [file, setFile] = useState<File>();
   const [imageObjectUrl, setImageObjectUrl] = useState<string | null>(null);
 
-  const {data: categories, isFetching} = useCategories();
-  
+  const { data: categories, isFetching } = useCategories();
+
   const router = useRouter();
 
   const createPost = (newPost: Partial<Post>) => axios.post("/api/posts", newPost).then((res) => res.data);
-  
-  const {mutate, isLoading} = useMutation(createPost,
-  {
-    onSuccess: (data: Post) => {
-      router.push(`/posts/${data.slug}`);
-    },
-  }
+
+  const { mutate, isLoading } = useMutation(createPost,
+    {
+      onSuccess: (data: Post) => {
+        router.push(`/posts/${data.slug}`);
+      },
+    }
   )
 
-  const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
 
 
-  const onChangeFile = (e:SyntheticEvent) => {
+  const onChangeFile = (e: SyntheticEvent) => {
     const files = (e.target as HTMLInputElement).files;
 
     if (!files || !files[0]) return;
@@ -106,7 +106,7 @@ export default function WritePage() {
             <div className="relative w-40 h-40 mx-auto mb-3 flex">
               <Image
                 className="object-cover rounded-lg"
-                src={imageObjectUrl} 
+                src={imageObjectUrl}
                 fill
                 alt={title}
               />
@@ -115,29 +115,29 @@ export default function WritePage() {
           <Input type="file" name="image" onChange={onChangeFile} />
         </div>
         {/* Title post */}
-        <Input 
-          type="text" 
-          placeholder="Title" 
-          className="mb-6" 
+        <Input
+          type="text"
+          placeholder="Title"
+          className="mb-6"
           onChange={(e) => setTitle(e.target.value)}
         />
         {/* Category / select */}
-        {isFetching ? <p>Loading categories</p> : 
-        <Select onValueChange={(value) => setCatSlug(value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="select a category" />
-          </SelectTrigger>
-          <SelectContent>
-            {categories.map((category: Category) => (
-              <SelectItem key={category.id} value={category.slug}>
-                {category.title}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>}
+        {isFetching ? <p>Loading categories</p> :
+          <Select onValueChange={(value) => setCatSlug(value)}>
+            <SelectTrigger>
+              <SelectValue placeholder="select a category" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((category: Category) => (
+                <SelectItem key={category.id} value={category.slug}>
+                  {category.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>}
         {/* Content */}
         <ReactQuill
-          className="mt-6" 
+          className="mt-6"
           placeholder="Write post content here..."
           value={content}
           onChange={setContent}

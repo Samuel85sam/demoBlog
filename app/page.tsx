@@ -42,7 +42,7 @@ export default function Home() {
           ))}
         </div>
         {/* List Posts section */}
-        {!isFetching && <PostsList posts={posts} />}
+        {!isFetching && <PostsList posts={posts || []} />}
       </div>
     </PageContainer>
   );

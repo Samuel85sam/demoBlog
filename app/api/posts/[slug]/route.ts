@@ -26,14 +26,17 @@ export const GET = async (
 ) => {
     const { slug } = params;
 
+    console.log('GET POSTS')
+
     try {
-        const post = await prisma.post.update({
+        const post = await prisma.post.findUnique({
             where: { slug },
-            data: { view : { increment: 1 } }
+            //data: { view : { increment: 1 } }
         });
         return NextResponse.json(post, { status: 200 });
 
     } catch (error) {
+        console.log(error)
         return NextResponse.json({error:"something went wrong !" }, { status: 500 });
     }
 };

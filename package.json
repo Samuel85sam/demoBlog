@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "npx prisma generate && npx prisma db push && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "insert-categories": "ts-node --skipProject ./scripts/insert-categories.ts",
+    "insert-posts": "ts-node --skipProject ./scripts/insert-posts.ts",
+    "update-posts": "ts-node --skipProject ./scripts/update-posts.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.5.0",
@@ -43,6 +46,7 @@
     "postcss": "^8",
     "prisma": "^5.11.0",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

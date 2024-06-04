@@ -5,19 +5,20 @@ import { NextResponse } from "next/server";
 
 export const GET = async(req: Request) => {
   try {
-    const {searchParams} = new URL(req.url);
+    const { searchParams } = new URL(req.url);
     const catSlug = searchParams.get("cat");
-
+    //TODO = Inconsistent query result: Field cat is required to return data, got `null` instead.
     const posts = await prisma.post.findMany({
       where: {
-        ...(catSlug && catSlug !== "null" && catSlug !== "" && {catSlug}),
+        ...(catSlug && catSlug !== "null" && catSlug !== "" && { catSlug }),
       },
       include: {
-        cat: true
+        cat: true,
       },
     });
-    return NextResponse.json(posts, {status: 200});
+    return NextResponse.json(posts, { status: 200 });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({error: "Something went wrong"}, {status: 500});
   }
 };
