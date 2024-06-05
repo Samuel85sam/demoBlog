@@ -6,22 +6,23 @@ export type Category = {
     slug: string;
 }
 export type Post = {
-    id: number;
-    category: string;
-    title: string;
-    image: string;
-    caption: string;
+    id: string;
     date: string | Date;
-    minutesToRead: number;
-    author: string;
-    nbViews: number;
-    nbComments: number;
+    title: string;
     slug: string;
     content?: string;
+    image: string;
+    nbViews: number;
+    nbComments: number;
+    author: string;
+    category: string;
+    //utiles??? ↓? 
+    caption: string;
+    minutesToRead: number;
 };
 
 export type PostWithCategory = Prisma.PostGetPayload<{
-    include: { cat: true };
+    include: { category : true };
 }>;
 
 export type CommentWithUser = Prisma.CommentGetPayload<{
