@@ -27,7 +27,7 @@ export default function PostCard({post}: Props) {
         </CardHeader>
         <CardContent>
           <Badge variant="outline" className="py-2 px-4">
-            {post.category.title}
+            {post.cat.title}
           </Badge>
         </CardContent>
         <CardFooter>

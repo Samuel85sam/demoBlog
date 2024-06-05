@@ -31,7 +31,7 @@ export function HeaderNavigation() {
                   key={category.id}
                   href={`/categories/${category.slug}`}
                 >
-                  {category.name}
+                  {category.title}
                 </ListItem>
               ))}
             </ul>
